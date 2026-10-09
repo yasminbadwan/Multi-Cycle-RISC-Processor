@@ -1,0 +1,13 @@
+[Version]
+Version=15.0
+[Designs]
+RISC_Processor=RISC_Processor.adf
+[Settings]
+Active=RISC_Processor
+[Expand]
+risc_processor=1
+[Browser]
+sort=order
+mode=none
+[Order]
+order=1
