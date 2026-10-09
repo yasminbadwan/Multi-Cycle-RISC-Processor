@@ -1,0 +1,38 @@
+// ============================================================
+// program.mem  -  Test Program for Multicycle RISC Processor
+// ============================================================
+// Format: 32-bit binary, one instruction per line.
+// Load with: $readmemb("program.mem", Memory);
+//
+// Instruction encoding:
+//   R-Type: [31:26]opcode [25:22]rd [21:18]rs [17:14]rt [13:0]unused
+//   I-Type: [31:26]opcode [25:22]rd [21:18]rs [17:0]imm18
+//
+// Opcodes: ADD=0 SUB=1 AND=2 OR=3 XOR=4 NOR=5 SLL=6 SRL=7 CLR=8 JR=9
+//          ADDI=10 ANDI=11 ORI=12 LW=13 SW=14 SWAP=15 BEQ=16 BNE=17 J=18 JAL=19
+//
+// Program:
+//   Addr 0: ADDI R1, R0, 5   -> R1 = 0 + 5 = 5
+//   Addr 1: ADD  R3, R1, R2  -> R3 = 5 + 0 = 5   (R2 starts at 0)
+//   Addr 2: ADDI R2, R0, 7   -> R2 = 0 + 7 = 7
+//   Addr 3: ADD  R3, R1, R2  -> R3 = 5 + 7 = 12
+//
+// Expected results after simulation:
+//   R1 = 5,  R2 = 7,  R3 = 12
+// ============================================================
+
+// Addr 0: ADDI R1, R0, 5
+// opcode=001010 rd=0001 rs=0000 imm18=000000000000000101
+00101000010000000000000000000101
+
+// Addr 1: ADD R3, R1, R2
+// opcode=000000 rd=0011 rs=0001 rt=0010 unused=00000000000000
+00000000110001001000000000000000
+
+// Addr 2: ADDI R2, R0, 7
+// opcode=001010 rd=0010 rs=0000 imm18=000000000000000111
+00101000100000000000000000000111
+
+// Addr 3: ADD R3, R1, R2
+// opcode=000000 rd=0011 rs=0001 rt=0010 unused=00000000000000
+00000000110001001000000000000000
